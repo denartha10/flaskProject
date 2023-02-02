@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+<body>
+
+<script>
+    function changes() {
+        document.getElementById("back_to_start").innerHTML = "<a style='visibility: visible ; text-decoration: none; color: black' href='/refresh'>RETURN TO UPLOAD</a>";
+    }
+
+    // wait 2 seconds before changing the link
+    function changeLink(){
+        document.getElementById("back_to_start").innerHTML = "<p'>😇</p>";
+        setTimeout(changes, 2000);
+    }
+</script>
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" method="post" enctype="multipart/form-data" action="/upload">
+            <!-- ALWAYS REMEMBER TO INCLUDE A NAME FOR THE INPUT -->
+            {% if not exists %}
+                <input type="file" style="display: none" id="file-upload" accept=".pdf" name="file"/>
+                <div class="label-div">
+                    <label for="file-upload">📁SELECT FILE 📁</label>
+                </div>
+            {% else %}
+                <div class="label-div">
+                    <label id="back_to_start"><a onclick="changeLink()" style='text-decoration: none; color: black' href='/download'>DOWNLOAD</a></label>
+                </div>
+            {% endif %}
+
+            {% if not exists %}
+                <button type="submit">Convert</button>
+            {% endif %}
+
+            <p class="message">Upload PDF<span> Get Excel 🧙🏻‍</span></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>
